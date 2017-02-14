@@ -6,6 +6,7 @@
 // Called every frame
 void ATankPlayerController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
+	AimTowardsCrosshair();
 }
 
 void ATankPlayerController::BeginPlay() {
@@ -27,4 +28,13 @@ void ATankPlayerController::AimTowardsCrosshair() {
 	if (!GetControlledTank()) {
 		return;
 	}
+	FVector HitLoc;
+	if (GetSightRayHitLoc(HitLoc)) {
+		UE_LOG(LogTemp, Warning, TEXT("HitLoc: %s"), *HitLoc.ToString());
+	}
+}
+
+bool ATankPlayerController::GetSightRayHitLoc(FVector & HitLoc) const {
+	HitLoc = GetControlledTank()->GetActorLocation();
+	return true;
 }
