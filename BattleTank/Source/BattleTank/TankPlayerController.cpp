@@ -3,6 +3,11 @@
 #include "BattleTank.h"
 #include "TankPlayerController.h"
 
+// Called every frame
+void ATankPlayerController::Tick(float DeltaTime) {
+	Super::Tick(DeltaTime);
+}
+
 void ATankPlayerController::BeginPlay() {
 	Super::BeginPlay();
 	auto ControlledTank = GetControlledTank();
@@ -16,4 +21,10 @@ void ATankPlayerController::BeginPlay() {
 
 ATank* ATankPlayerController::GetControlledTank() const {
 	return Cast<ATank> (GetPawn());
+}
+
+void ATankPlayerController::AimTowardsCrosshair() {
+	if (!GetControlledTank()) {
+		return;
+	}
 }
