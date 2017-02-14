@@ -35,6 +35,9 @@ void ATankPlayerController::AimTowardsCrosshair() {
 }
 
 bool ATankPlayerController::GetSightRayHitLoc(FVector & HitLoc) const {
-	HitLoc = GetControlledTank()->GetActorLocation();
+	int32 ViewportSizeX, ViewportSizeY;
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
+	auto ScreenLoc = FVector2D(ViewportSizeX*CrossHairXLoc, ViewportSizeY*CrossHairYLoc);
+	UE_LOG(LogTemp, Warning, TEXT("ScreenLoc: %s"), *ScreenLoc.ToString());
 	return true;
 }
