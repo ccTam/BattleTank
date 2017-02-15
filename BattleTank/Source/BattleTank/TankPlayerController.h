@@ -25,4 +25,5 @@ private:
 	float CrossHairXLoc = .5;
 	UPROPERTY(EditAnywhere)
 	float CrossHairYLoc = .33333;
+	bool GetLookDir(FVector2D, FVector&) const;
 };
