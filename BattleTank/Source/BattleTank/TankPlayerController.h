@@ -6,9 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
@@ -25,8 +23,6 @@ private:
 	float CrossHairXLoc = .5;
 	UPROPERTY(EditAnywhere)
 	float CrossHairYLoc = .3333333;
-	bool GetLookDir(FVector2D, FVector&) const;
 	UPROPERTY(EditAnywhere)
 	float LineTraceRange = 10000;
-	bool GetLookVectorHitLoc(FVector, FVector&)const;
 };
