@@ -38,20 +38,37 @@ bool ATankPlayerController::GetSightRayHitLoc(FVector & HitLoc) const {
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto ScreenLoc = FVector2D(ViewportSizeX*CrossHairXLoc, ViewportSizeY*CrossHairYLoc);
+	FHitResult HitResult;
 	//De-project the screen position of the crosshair to a world direction
-	FVector LookDir;
-	if (GetLookDir(ScreenLoc, LookDir)) {
-		UE_LOG(LogTemp, Warning, TEXT("LookDir: %s"), *LookDir.ToString());
+	if (GetHitResultAtScreenPosition(ScreenLoc, ECollisionChannel::ECC_Visibility, false, HitResult)) {
+		HitLoc = HitResult.Location;
+		DrawDebugLine(GetWorld(), HitResult.TraceStart, HitResult.TraceEnd, FColor::Red);
+		return true;
 	}
-	return true;
+	//FVector LookDir;
+	//if (GetLookDir(ScreenLoc, LookDir)) {
+	//	UE_LOG(LogTemp, Warning, TEXT("LookDir: %s"), *LookDir.ToString());
+	//	GetLookVectorHitLoc(LookDir, HitLoc);
+	//}
+	return false;
 }
 
-bool ATankPlayerController::GetLookDir(FVector2D ScreenLoc, FVector& LookDir) const{
-	FVector CameraWorldLoc;
-	return DeprojectScreenPositionToWorld(
-		ScreenLoc.X, 
-		ScreenLoc.Y, 
-		CameraWorldLoc, 
-		LookDir
-	);
-}
+//bool ATankPlayerController::GetLookDir(FVector2D ScreenLoc, FVector& LookDir) const{
+//	FVector CameraWorldLoc;
+//	return DeprojectScreenPositionToWorld(
+//		ScreenLoc.X, 
+//		ScreenLoc.Y, 
+//		CameraWorldLoc, 
+//		LookDir
+//	);
+//}
+//
+//bool ATankPlayerController::GetLookVectorHitLoc(FVector LookDir, FVector& HitLoc) const{
+//	FHitResult HitResult;
+//	auto StartLoc = PlayerCameraManager->GetCameraLocation();
+//	auto EndLoc = StartLoc + LookDir*LineTraceRange;
+//	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLoc, EndLoc, ECollisionChannel::ECC_Visibility)) {
+//		return true;
+//	} 
+//	
+//}	return false;

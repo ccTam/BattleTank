@@ -24,6 +24,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float CrossHairXLoc = .5;
 	UPROPERTY(EditAnywhere)
-	float CrossHairYLoc = .33333;
+	float CrossHairYLoc = .3333333;
 	bool GetLookDir(FVector2D, FVector&) const;
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 10000;
+	bool GetLookVectorHitLoc(FVector, FVector&)const;
 };
