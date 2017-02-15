@@ -42,6 +42,7 @@ bool ATankPlayerController::GetSightRayHitLoc(FVector & HitLoc) const {
 	//De-project the screen position of the crosshair to a world direction
 	if (GetHitResultAtScreenPosition(ScreenLoc, ECollisionChannel::ECC_Visibility, false, HitResult)) {
 		HitLoc = HitResult.Location;
+		DrawDebugLine(GetWorld(), HitResult.TraceStart, HitResult.TraceEnd, FColor::Red);
 		return true;
 	}
 	return false;
