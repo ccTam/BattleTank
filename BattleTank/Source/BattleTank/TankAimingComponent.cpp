@@ -24,8 +24,6 @@ void UTankAimingComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
 }
 
 
@@ -38,8 +36,25 @@ void UTankAimingComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 }
 
 void UTankAimingComponent::AimAt(FVector HitLoc, float LaunchSpeed) {
-	auto TankName = GetOwner()->GetName();
-	auto BarrelLoc = Barrel->GetComponentLocation();
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s"), *GetOwner()->GetName(), *HitLoc.ToString(), *BarrelLoc.ToString());
-	DrawDebugLine(GetWorld(), GetOwner()->GetActorLocation(), HitLoc, FColor::Red); 
+	if (!Barrel) { return; }
+	FVector OutLaunchVelocity;
+	FVector StartLoc = Barrel->GetSocketLocation(FName("FirePos"));
+	
+	bool bSPV = UGameplayStatics::SuggestProjectileVelocity(
+		this,
+		OutLaunchVelocity,
+		StartLoc,
+		HitLoc,
+		LaunchSpeed,
+		false,
+		0,
+		0,
+		ESuggestProjVelocityTraceOption::DoNotTrace
+	);
+
+	if (bSPV) {
+		auto AimDir = OutLaunchVelocity.GetSafeNormal();
+		UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDir.ToString());
+	}
+	DrawDebugLine(GetWorld(), Barrel->GetSocketLocation(FName("FirePos")), HitLoc, FColor::Red); 
 }
