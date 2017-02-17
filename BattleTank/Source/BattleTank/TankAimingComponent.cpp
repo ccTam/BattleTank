@@ -31,8 +31,10 @@ void UTankAimingComponent::AimAt(FVector HitLoc, float LaunchSpeed) {
 		StartLoc,
 		HitLoc,
 		LaunchSpeed,
-		ESuggestProjVelocityTraceOption::TraceFullPath,
-		true
+		false,
+		0,
+		0,
+		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 
 	if (bSPV) {
