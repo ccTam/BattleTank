@@ -36,12 +36,13 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	UPROPERTY(EditAnyWhere, Category = Firing)
-	float LaunchSpeed = 4000;
+	float LaunchSpeed = 6000;
 	UPROPERTY(EditAnyWhere, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	//Local Barrel for projectile
 	UTankBarrel* Barrel = nullptr;
-	float ReloadTime = 3;
+	UPROPERTY(EditAnyWhere, Category = Firing)
+	float ReloadTime = 5;
 	double LastFireTime = 0;
 }; 
