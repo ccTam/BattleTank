@@ -18,7 +18,7 @@ private:
 
 	//moving barrel to aim
 	void AimTowardsCrosshair();
-	bool GetSightRayHitLoc(FVector &) const;
+	bool GetSightRayHitLoc(FVector& HitLoc) const;
 	UPROPERTY(EditAnywhere)
 	float CrossHairXLoc = .5;
 	UPROPERTY(EditAnywhere)

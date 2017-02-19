@@ -39,7 +39,7 @@ void UTankAimingComponent::AimAt(FVector HitLoc, float LaunchSpeed) {
 
 	if (bSPV) {
 		auto AimDir = OutLaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDir.ToString());
+		//UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDir.ToString());
 		MoveBarrelTowards(AimDir);
 	}
 	DrawDebugLine(GetWorld(), Barrel->GetSocketLocation(FName("FirePos")), HitLoc, FColor::Red); 
@@ -49,6 +49,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDir) {
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDir.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator:%s"), *DeltaRotator.ToString());
-	Barrel->Elevate(5);
+	//UE_LOG(LogTemp, Warning, TEXT("AimAsRotator:%s"), *DeltaRotator.ToString());
+	Barrel->Elevate(DeltaRotator.Pitch);
 }

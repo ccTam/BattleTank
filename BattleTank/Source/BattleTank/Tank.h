@@ -29,5 +29,5 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	UPROPERTY(EditAnyWhere, Category = Firing)
-	float LaunchSpeed = 5000;
+	float LaunchSpeed = 8000;
 }; 
