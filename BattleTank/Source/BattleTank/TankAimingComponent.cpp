@@ -41,11 +41,14 @@ void UTankAimingComponent::AimAt(FVector HitLoc, float LaunchSpeed) {
 
 	if (bSPV) {
 		auto AimDir = OutLaunchVelocity.GetSafeNormal();
-		//UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDir.ToString());
 		MoveBarrelTowards(AimDir);
 		MoveTurretTowards(AimDir);
+		DrawDebugLine(GetWorld(), Barrel->GetSocketLocation(FName("FirePos")), HitLoc, FColor::Red);
 	}
-	DrawDebugLine(GetWorld(), Barrel->GetSocketLocation(FName("FirePos")), HitLoc, FColor::Red); 
+	else {
+
+	}
+	
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDir) {
